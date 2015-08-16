@@ -47,7 +47,7 @@ Id   | Name
 0    | Free For All
 1    | Teams
 2    | Experimental
-3    | Virus Off (not done!)
+3    | Virus Off
 10   | Tournament
 11   | Hunger Games
 12   | Zombie Mode
@@ -103,6 +103,10 @@ The current available console commands are listed here. Command names are not ca
    * Teleports the specified player to the specified coordinates.
  - Virus [X position] [Y position] [Mass]
    * Spawns a virus cell at those coordinates. If a mass value is not specified, then the server will default to "virusStartMass" in the config.
+
+## Known Issues
+* Bots are braindead
+Found any more? Post them in the issues tab!
 
 ## License
 Please see [this link](https://github.com/DaFudgeWizzad/Ogar-Plus/blob/master/LICENSE.md)

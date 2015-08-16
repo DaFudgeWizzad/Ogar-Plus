@@ -47,6 +47,11 @@ Mode.prototype.pressW = function(gameServer,player) {
     gameServer.ejectMass(player);
 };
 
+Mode.prototype.pressE = function(gameServer,player) {
+    // Called when the W key is pressed
+    gameServer.ShootVirus(ejected);
+};
+
 Mode.prototype.pressSpace = function(gameServer,player) {
     // Called when the Space bar is pressed
     gameServer.splitCells(player);

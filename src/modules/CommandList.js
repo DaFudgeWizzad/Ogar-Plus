@@ -26,27 +26,6 @@ var fillChar = function (data, char, fieldLength, rTL) {
 // Commands
 
 Commands.list = { 
-	merge: function(gameServer,split) {
-		// Validation checks
-		var id = parseInt(split[1]);
-        if (isNaN(id)) {
-            console.log("[Ogar-Plus] Please specify a valid player ID!");
-            return;
-        }
-
-        // Sets merge time
-        for (var i in gameServer.clients) {
-            if (gameServer.clients[i].playerTracker.pID == id) {
-                var client = gameServer.clients[i].playerTracker;
-                for (var j in client.cells) {
-                    client.cells[j].calcMergeTime(0);
-                }
-
-                console.log("[Ogar-Plus] Forced " + client.name + " to merge cells");
-                break;
-            }
-        }
-    },
 	help: function(gameServer,split) {
         console.log("========================== HELP ============================");
         console.log("[Ogar-Plus] addbot     : add one bot to the server");
@@ -74,7 +53,28 @@ Commands.list = {
         console.log("[Ogar-Plus] ping       : checks your ping")
 		console.log("============================================================");
     },
-    addbot: function(gameServer,split) {
+    merge: function(gameServer,split) {
+		// Validation checks
+		var id = parseInt(split[1]);
+        if (isNaN(id)) {
+            console.log("[Ogar-Plus] Please specify a valid player ID!");
+            return;
+        }
+
+        // Sets merge time
+        for (var i in gameServer.clients) {
+            if (gameServer.clients[i].playerTracker.pID == id) {
+                var client = gameServer.clients[i].playerTracker;
+                for (var j in client.cells) {
+                    client.cells[j].calcMergeTime(0);
+                }
+
+                console.log("[Ogar-Plus] Forced " + client.name + " to merge cells");
+                break;
+            }
+        }
+    },
+	addbot: function(gameServer,split) {
         var add = parseInt(split[1]);
         if (isNaN(add)) {
             add = 10; // Adds 1 bot if user doesnt specify a number

@@ -84,7 +84,12 @@ PlayerTracker.prototype.update = function() {
         this.socket.packetHandler.pressSpace = false;
     }
 
-    if (this.socket.packetHandler.pressW) { // Eject mass
+	if (this.socket.packetHandler.pressE) { // Shoot Virus
+        this.gameServer.gameMode.pressE(this.gameServer,this);
+        this.socket.packetHandler.pressE = false;
+    }
+	
+	if (this.socket.packetHandler.pressW) { // Eject mass
         this.gameServer.gameMode.pressW(this.gameServer,this);
         this.socket.packetHandler.pressW = false;
     }

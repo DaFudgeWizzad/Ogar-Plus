@@ -1,6 +1,9 @@
+var FFA = require('./FFA') //Base Gamemode
 var Entity = require('../entity');
 
 function VO() {
+    FFA.apply(this, Array.prototype.slice.call(arguments));
+	
     this.ID = 3;
     this.name = "Virus Off";
     this.decayMod = 1.0; // Modifier for decay rate (Multiplier)
@@ -11,24 +14,13 @@ function VO() {
 }
 
 module.exports = VO;
+VO.prototype = new FFA();
 
 // Override these
 
 VO.prototype.onServerInit = function(gameServer) {
     // Called when the server starts
     gameServer.run = true;
-};
-
-VO.prototype.onTick = function(gameServer) {
-    // Called on every game tick 
-};
-
-VO.prototype.onChange = function(gameServer) {
-    // Called when someone changes the gamemode via console commands
-};
-
-VO.prototype.onPlayerInit = function(player) {
-    // Called after a player object is constructed
 };
 
 VO.prototype.onPlayerSpawn = function(gameServer,player) {
@@ -46,12 +38,6 @@ VO.prototype.pressQ = function(gameServer,player) {
 
 VO.prototype.pressW = function(gameServer,player) {
     // Called when the W key is pressed
-    //var newVirus = new Entity.Virus(this.getNextNodeId(), null, player.position(), 30);
-    //newVirus.setAngle(player.getAngle());
-    //newVirus.setMoveEngineData(200, 20);
-    //this.addNode(newVirus);
-    //this.setAsMovingNode(newVirus);
-    //gameServer.ejectMass(player);
     var client = player;
 for (var i = 0; i < client.cells.length; i++) {
         var cell = client.cells[i];
@@ -85,28 +71,12 @@ for (var i = 0; i < client.cells.length; i++) {
         ejected.setAngle(angle);
         ejected.setMoveEngineData(160, 20);
 
-        gameServer.addNode(ejected);
         gameServer.setAsMovingNode(ejected);
+		gameServer.shootVirus(ejected)
 };
 };
 
 VO.prototype.pressSpace = function(gameServer,player) {
     // Called when the Space bar is pressed
     gameServer.splitCells(player);
-};
-
-VO.prototype.onCellAdd = function(cell) {
-    // Called when a player cell is added
-};
-
-VO.prototype.onCellRemove = function(cell) {
-    // Called when a player cell is removed
-};
-
-VO.prototype.onCellMove = function(x1,y1,cell) {
-    // Called when a player cell is moved
-};
-
-VO.prototype.updateLB = function(gameServer) {
-    // Called when the leaderboard update function is called
 };
